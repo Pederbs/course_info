@@ -122,8 +122,9 @@ if __name__ == "__main__":
         'search': 'True',
         'DescInsegnamentoButton': 'cerca',
         'descrizioneMateria': '',
-        'codiceAmbito': '4', # 4: Engineering and Architecture, 
-                            # 9: Science
+        'codiceAmbito': '1', # 4: Engineering and Architecture, 
+                             # 9: Science
+                             # 1: Economics
         'linguaInsegnamento': 'english',
         'codiceTipoCorso': '',
         'annoAccademico': '2024'

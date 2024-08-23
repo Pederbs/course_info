@@ -22,6 +22,6 @@ df_clean.to_json(
     indent=4
 )
 
-print(f"Cleaned data saved to {output_json_file}")
-print(f"number of rows before cleaning: {df.shape[0]}")
-print(f"number of rows after cleaning: {df_clean.shape[0]}")
+logger.info(f"Cleaned data saved to {output_json_file}")
+logger.info(f"Removed {df.shape[0] - df_clean.shape[0]} courses")
+logger.info(f"Saving courses to {output_json_file}")

@@ -48,7 +48,10 @@ def find_courses(base_url: str, params: dict) -> list:
 
         for course in course_list:
             course_name = course.find('span', class_='teachingname').text.strip()
-            credits = course.find('span', class_='cfu').text.strip().replace('Credits: ', '')
+            try:
+                credits = course.find('span', class_='cfu').text.strip().replace('Credits: ', '')
+            except:
+                logger.error(f"{course_name} does not have credits, {type(course.find('span', class_='cfu'))}")  
             teacher = course.find('span', class_='teacher').text.strip() if course.find('span', class_='teacher') else "Not Available"
             
             # Safe extraction of course URL
@@ -114,6 +117,7 @@ if __name__ == "__main__":
     base_url = 'https://www.unibo.it/en/study/phd-professional-masters-specialisation-schools-and-other-programmes/course-unit-catalogue'
 
     params = {
+        # For a full parameter list check the url after doing a search from the base url. 
         'pagenumber': 1,
         'pagesize': 100,  # Number of courses per page (adjust if needed)
         'order': 'asc',
@@ -122,18 +126,18 @@ if __name__ == "__main__":
         'search': 'True',
         'DescInsegnamentoButton': 'cerca',
         'descrizioneMateria': '',
-        'codiceAmbito': '1', # 4: Engineering and Architecture, 
-                             # 9: Science
-                             # 1: Economics
+        'codiceAmbito': 1,  # 4: Engineering and Architecture, 
+                            # 9: Science
+                            # 1: Economics
         'linguaInsegnamento': 'english',
         'codiceTipoCorso': '',
-        'annoAccademico': '2024'
+        'annoAccademico': 2024
     }
     
     courses = find_courses(base_url, params)
 
 
-    output_file = 'Engineering.json'
+    output_file = 'Economics.json'
     logger.info(f"Scraped a total of {len(courses)} courses")
 
     with open(output_file, 'w', encoding='utf-8') as jsonfile:

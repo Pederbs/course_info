@@ -1,3 +1,5 @@
 fag.md
 /courses
 .venv
+.direnv
+.envrc
